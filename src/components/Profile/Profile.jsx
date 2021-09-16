@@ -1,20 +1,13 @@
 import React from "react";
-import classes from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
-import Post from "./MyPosts/Post/Post";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
-    return (<div>
+const Profile = (props) => {
+    return (
         <div>
-            <img
-                src='https://jssors8.azureedge.net/demos/image-slider/img/px-beach-daylight-fun-1430675-image.jpg'/>
-        </div>
-        <div>
-            ava + description
-        </div>
-        <MyPosts/>
-
-    </div>)
+            <ProfileInfo/>
+            <MyPosts posts={props.posts}/>
+        </div>)
 }
 
 export default Profile;
