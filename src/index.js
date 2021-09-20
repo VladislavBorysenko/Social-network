@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from "./redux/state";
-import {BrowserRouter} from "react-router-dom";
+import state from './redux/state';
+import {BrowserRouter} from 'react-router-dom';
+import {addPost} from './redux/state'
 
+addPost('hei hei ');
 
 ReactDOM.render(
     <React.StrictMode>
