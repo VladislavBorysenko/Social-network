@@ -19,4 +19,12 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
      return state;
 }
 
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const updateNewMessageTextActionCreator = (body) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        body: body,
+    }
+}
+
 export default dialogReducer;
