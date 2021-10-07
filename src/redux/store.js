@@ -32,7 +32,7 @@ let store = {
                 {id: 5, message: 'Yo'},
                 {id: 6, message: 'Yo'}
             ],
-            newMessageText: ' '
+            newMessageText: ''
         },
         sideBar: {},
     },
@@ -42,7 +42,6 @@ let store = {
     },
 
     getState() {
-        debugger;
         return this._state;
     },
 
@@ -61,9 +60,4 @@ let store = {
 
 }
 
-
-
-
-
 export default store;
-window.store = store;
