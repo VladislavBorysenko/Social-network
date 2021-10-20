@@ -1,45 +1,15 @@
 import React from "react";
 import style from "./Users.module.css";
-
+import *as axios from "axios";
+import defaultUserPhoto from "../../assets/images/images.png"
 let Users = (props) => {
 
     if (props.users.length === 0) {
-        props.setUsers(
-            [
-                {
-                    id: 1,
-                    photoUrl: 'https://drawinghowtos.com/wp-content/uploads/2020/02/bear-face-colored.jpg',
-                    followed: true,
-                    fullName: 'Ivan',
-                    status: 'I am a boss',
-                    location: {country: 'Ukraine', city: 'Kiev'}
-                },
-                {
-                    id: 2,
-                    photoUrl: 'https://drawinghowtos.com/wp-content/uploads/2020/02/bear-face-colored.jpg',
-                    followed: false,
-                    fullName: 'Vlad',
-                    status: 'Hi',
-                    location: {country: 'America', city: 'Los-Angeles'}
-                },
-                {
-                    id: 3,
-                    photoUrl: 'https://drawinghowtos.com/wp-content/uploads/2020/02/bear-face-colored.jpg',
-                    followed: false,
-                    fullName: 'Maya',
-                    status: 'test',
-                    location: {country: 'Beloruse', city: 'Minsk'}
-                },
-                {
-                    id: 4,
-                    photoUrl: 'https://drawinghowtos.com/wp-content/uploads/2020/02/bear-face-colored.jpg',
-                    followed: true,
-                    fullName: 'Andrey',
-                    status: 'Hello world',
-                    location: {country: 'Ukraine', city: 'Kharkiv'}
-                }
-            ]
-        )
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(response.data.items)
+        })
+
     }
 
     return <div>
@@ -47,7 +17,7 @@ let Users = (props) => {
             props.users.map(u => <div key={u.id}>
             <span>
                 <div>
-                    <img src={u.photoUrl} className={style.userPhoto}/>
+                    <img src={u.photos.small!=null?u.photos.small:defaultUserPhoto} className={style.userPhoto}/>
                 </div>
                 <div>
                     {u.followed
@@ -62,12 +32,12 @@ let Users = (props) => {
             </span>
                 <span>
                 <span>
-                    <div>{u.fullName}</div>
+                    <div>{u.name}</div>
                     <div>{u.status}</div>
                 </span>
                 <span>
-                    <div>{u.location.country}</div>
-                    <div>{u.location.city}</div>
+                    <div>{u.id}</div>
+
                 </span>
             </span>
             </div>)}
