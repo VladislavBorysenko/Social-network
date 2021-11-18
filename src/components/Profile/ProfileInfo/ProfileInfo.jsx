@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './ProfileInfo.module.css'
+import classes from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
 
 const ProfileInfo = (props) => {
@@ -9,7 +9,7 @@ const ProfileInfo = (props) => {
     return (<div>
             <div>
                 <img
-                    src='https://jssors8.azureedge.net/demos/image-slider/img/px-beach-daylight-fun-1430675-image.jpg'/>
+                    src="https://jssors8.azureedge.net/demos/image-slider/img/px-beach-daylight-fun-1430675-image.jpg"/>
             </div>
             <div className={classes.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
