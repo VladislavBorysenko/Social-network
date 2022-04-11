@@ -1,6 +1,9 @@
+import {profileAPI, usersAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_STATUS = 'SET-STATUS';
+
 
 let initialState = {
     posts: [
@@ -9,8 +12,8 @@ let initialState = {
         {id: 3, message: 'Hello word', likeCount: 10},
         {id: 4, message: 'Yo, whats up', likeCount: 3}
     ],
-    newPostText: 'it-kamasutra.com',
-    profile: null
+    profile: null,
+    status: '',
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -19,7 +22,7 @@ const profileReducer = (state = initialState, action) => {
         case 'ADD-POST': {
             let newPost = {
                 id: state.posts.length + 1,
-                message: state.newPostText,
+                message: action.newPostText,
                 likeCount: 0,
             };
             return {
@@ -28,26 +31,49 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: ''
             };
         }
-        case 'UPDATE-NEW-POST-TEXT': {
+
+        case 'SET-STATUS': {
             return {
                 ...state,
-                newPostText: action.newText
-            };
+                status: action.status
+            }
         }
-        case 'SET_USER_PROFILE': {
+        case 'SET-USER-PROFILE': {
             return {...state, profile: action.profile}
         }
+
         default:
             return state;
     }
+
 }
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
-export const updateNewPostActionCreator = (newText) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    }
+
+//action creators
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const setStatus = (status) => ({type: SET_STATUS, status});
+
+//thunks
+export const getUserProfile = (userId) => (dispatch) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
+};
+
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response.data));
+        });
+}
+
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        });
 }
 
 export default profileReducer;

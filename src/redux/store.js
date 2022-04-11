@@ -32,7 +32,7 @@ let store = {
                 {id: 5, message: 'Yo'},
                 {id: 6, message: 'Yo'}
             ],
-            newMessageText: ''
+            newMessageBody: ''
         },
         sideBar: {},
     },
